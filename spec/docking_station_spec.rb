@@ -13,4 +13,9 @@ describe DockingStation do
   it "should expect the bike to be working" do
     expect(bike).to be_working
   end
+
+  it "should dock bike to a docking station" do
+    expect(docking_station).to respond_to(:dock_bike)
+  end
+
 end
