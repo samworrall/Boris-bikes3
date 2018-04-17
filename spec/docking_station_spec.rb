@@ -15,7 +15,12 @@ describe DockingStation do
   end
 
   it "should dock bike to a docking station" do
-    expect(docking_station).to respond_to(:dock_bike)
+    expect(docking_station).to respond_to(:dock_bike).with(1).argument
+  end
+
+  it "should allow bike to be docked" do
+    docking_station.dock_bike(bike)
+    expect(docking_station).to have_attributes(:bike => bike)
   end
 
 end
