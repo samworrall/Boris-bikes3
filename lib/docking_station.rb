@@ -1,12 +1,19 @@
 require './lib/bike'
 
 class DockingStation
-  attr_accessor :bike
+  attr_reader :bikes
+
+  def initialize
+    @bikes = []
+  end
+
   def release_bike
-    bike = Bike.new
+    fail 'No bikes docked at this station.' if @bikes == []
+    @bikes
   end
 
   def dock_bike(bike)
-    @bike = bike
+    fail 'Docking station is at full capacity.' unless @bikes == []
+    @bikes.push(bike)
   end
 end

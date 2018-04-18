@@ -2,25 +2,32 @@ require 'docking_station'
 require 'bike'
 
 describe DockingStation do
-  docking_station = DockingStation.new
-  bike = Bike.new
-  it "should respond" do
-    expect(docking_station).to respond_to(:release_bike)
-  end
-  it "should get a bike when asked to release_bike" do
-    expect(docking_station.release_bike).to be_instance_of(Bike)
-  end
-  it "should expect the bike to be working" do
-    expect(bike).to be_working
+
+  it {is_expected.to respond_to(:release_bike).with(0).argument}
+
+  describe '#release_bike' do
+    docking_station = DockingStation.new
+    it "raises an error when there are no bikes docked" do
+      expect{docking_station.release_bike}.to raise_error 'No bikes docked at this station.'
+    end
+    it "should get a bike when asked to release a bike" do
+      bike = Bike.new
+      docking_station.dock_bike(bike)
+      expect(docking_station.release_bike.last).to be_instance_of(Bike)
+    end
   end
 
-  it "should dock bike to a docking station" do
-    expect(docking_station).to respond_to(:dock_bike).with(1).argument
-  end
+  it {is_expected.to respond_to(:dock_bike).with(1).argument}
 
-  it "should allow bike to be docked" do
-    docking_station.dock_bike(bike)
-    expect(docking_station).to have_attributes(:bike => bike)
+  describe '#dock_bike' do
+    docking_station = DockingStation.new
+    it "should allow bike to be docked" do
+      docking_station.dock_bike(bike = Bike.new)
+      expect(docking_station.bikes.last).to eq(bike)
+    end
+    it "raises an error when dock station capacity is full" do
+      expect{docking_station.dock_bike(Bike.new)}.to raise_error 'Docking station is at full capacity.'
+    end
   end
 
 end
