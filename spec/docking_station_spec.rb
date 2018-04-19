@@ -29,6 +29,7 @@ describe DockingStation do
       subject.dock_bike(bike)
       expect(subject.release_bike).to be_instance_of(Bike)
     end
+
   end
 
   it {is_expected.to respond_to(:dock_bike).with(1).argument}
