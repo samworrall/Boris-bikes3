@@ -21,7 +21,7 @@ describe DockingStation do
   describe '#release_bike' do
 
     let(:bike) { double :bike }
-    let(:broken_bike) { double :bike }
+    let(:broken_bike) { double :broken_bike }
 
     it "raises an error when there are no bikes docked" do
       expect{subject.release_bike}.to raise_error 'No bikes docked at this station.'
