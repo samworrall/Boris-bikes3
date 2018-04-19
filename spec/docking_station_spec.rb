@@ -37,6 +37,14 @@ describe DockingStation do
       expect{subject.release_bike}.to raise_error 'No working bikes available.'
     end
 
+    it "returns a working bike even if broken bike was last one docked" do
+      working_bike = Bike.new
+      broken_bike = Bike.new(false)
+      subject.dock_bike(working_bike)
+      subject.dock_bike(broken_bike)
+      expect(subject.release_bike).to eq(working_bike)
+    end
+
   end
 
   it {is_expected.to respond_to(:dock_bike).with(1).argument}
