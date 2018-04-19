@@ -57,7 +57,9 @@ describe DockingStation do
     end
 
     it "raises an error when dock station capacity is full" do
-      DEFAULT_CAPACITY.times { subject.dock_bike(Bike.new) }
+      half_capacity = DEFAULT_CAPACITY / 2
+      half_capacity.times { subject.dock_bike(Bike.new) }
+      half_capacity.times { subject.dock_bike(Bike.new(false)) }
       expect{subject.dock_bike(Bike.new)}.to raise_error 'Docking station is at full capacity.'
     end
 
