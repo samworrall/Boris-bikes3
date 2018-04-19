@@ -5,11 +5,25 @@ describe DockingStation do
   DEFAULT_CAPACITY = 20
   it {is_expected.to respond_to(:release_bike).with(0).argument}
 
+  describe '#initialize' do
+    it "allows user to set @capacity when initializing" do
+      new_capacity = 3
+      station = DockingStation.new(new_capacity)
+      expect(station.capacity).to eq(new_capacity)
+    end
+
+    it "ensure @capacity is set to default when no parameters are passed" do
+      station = DockingStation.new
+      expect(station.capacity).to eq(DEFAULT_CAPACITY)
+    end
+  end
+
   describe '#release_bike' do
 
     it "raises an error when there are no bikes docked" do
       expect{subject.release_bike}.to raise_error 'No bikes docked at this station.'
     end
+
     it "should get a bike when asked to release a bike" do
       bike = Bike.new
       subject.dock_bike(bike)
@@ -33,5 +47,7 @@ describe DockingStation do
     end
 
   end
+
+
 
 end
