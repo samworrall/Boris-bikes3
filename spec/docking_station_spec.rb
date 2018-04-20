@@ -5,7 +5,6 @@ describe DockingStation do
   let(:bike) { double :bike, working: true }
   let(:broken_bike) { double :broken_bike, working: false }
   DEFAULT_CAPACITY = 20
-  it {is_expected.to respond_to(:release_bike).with(0).argument}
 
   describe '#initialize' do
     it "allows user to set @capacity when initializing" do
@@ -44,19 +43,14 @@ describe DockingStation do
 
   end
 
-  it {is_expected.to respond_to(:dock_bike).with(1).argument}
-
   describe '#dock_bike' do
 
-    it "should allow a working bike to be docked" do
+    it "should allow a both working bike and broken bike to be docked" do
       subject.dock_bike(bike)
-      expect(subject.bikes.last).to eq(bike)
+      subject.dock_bike(broken_bike)
+      expect([subject.bikes.last, subject.broken_bikes.last]).to eq([bike, broken_bike])
     end
 
-    it "should allow a broken bike to be docked" do
-      subject.dock_bike(broken_bike)
-      expect(subject.broken_bikes.last).to eq(broken_bike)
-    end
 
     it "raises an error when dock station capacity is full" do
       half_capacity = DEFAULT_CAPACITY / 2
