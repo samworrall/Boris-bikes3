@@ -1,7 +1,12 @@
 class Van
+  attr_reader :bikes
 
-  def collect_broken_bikes
+  def initialize
+    @bikes = []
+  end
 
-  end 
+  def collect_broken_bikes(station)
+    @bikes + station.broken_bikes
+  end
 
 end
