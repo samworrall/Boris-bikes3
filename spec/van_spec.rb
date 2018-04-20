@@ -13,7 +13,7 @@ let(:garage_repair) {double :garage, bikes: [bike]}
   describe '#collect_broken_bikes', :collect do
     it 'returns array of broken bikes' do
       station.dock_bike(broken_bike)
-      expect(subject.collect_broken_bikes(station)).to eq station.broken_bikes
+      expect(subject.collect_broken_bikes(station)).to eq [broken_bike]
     end
 
     it 'raises an error when there are no broken bikes to collect' do

@@ -1,3 +1,6 @@
+require './lib/docking_station.rb'
+require './lib/bike.rb'
+require './lib/van.rb'
 
 def collecting_broken_bikes
   station = DockingStation.new
@@ -18,4 +21,12 @@ def collect_repaired_bikes
   van = Van.new
   bike = Bike.new(working = true)
   van.collect_broken_bikes(garage)
+end
+
+def distribute_repaired_bikes
+  van = Van.new
+  bike = Bike.new(working = true)
+  station = DockingStation.new
+  van.bikes << bike
+  van.distribute_repaired_bikes(station)
 end
