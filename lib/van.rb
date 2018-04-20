@@ -11,4 +11,16 @@ class Van
     station.broken_bikes.clear
     @bikes
   end
+
+  def drop_off_broken_bikes(garage)
+    garage.bikes.concat @bikes
+    @bikes.clear
+    @bikes
+  end
+
+  def collect_repaired_bikes(garage)
+    @bikes.concat garage.bikes
+    garage.bikes.clear
+    @bikes
+  end
 end
