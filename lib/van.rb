@@ -23,4 +23,11 @@ class Van
     garage.bikes.clear
     @bikes
   end
+
+  def distribute_repaired_bikes(station)
+    fail "There are no repaired bikes to drop off" if @bikes.empty? #|| !@bikes.include?(Bike(working = false))
+    station.bikes.concat @bikes
+    @bikes.clear
+    @bikes
+  end
 end
